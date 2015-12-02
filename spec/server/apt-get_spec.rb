@@ -8,15 +8,31 @@ if ENV['CIRCLECI']
 end
 
 describe 'apt-get' do
+  describe package('build-essential') do
+    it { should be_installed }
+  end
+
   describe package('curl') do
     it { should be_installed }
   end
 
-  describe package('default-jdk') do
+  describe package('git') do
     it { should be_installed }
   end
 
-  describe package('git') do
+  describe package('libreadline-dev') do
+    it { should be_installed }
+  end
+
+  describe package('libssl-dev') do
+    it { should be_installed }
+  end
+
+  describe package('libyaml-dev') do
+    it { should be_installed }
+  end
+
+  describe package('libxml2-dev') do
     it { should be_installed }
   end
 
@@ -28,11 +44,17 @@ describe 'apt-get' do
     it { should be_installed }
   end
 
-  describe package('scala') do
+  describe package('zlib1g-dev') do
     it { should be_installed }
   end
 
-  describe package('wget') do
-    it { should be_installed }
+  # Update-alternatives nodojs to node
+  describe command('which node') do
+    its(:exit_status) { should eq 0 }
+  end
+
+  # Update npm to the latest version?
+  describe command('npm -v') do
+    its(:stdout) { should_not match /1.3.10/ }
   end
 end
