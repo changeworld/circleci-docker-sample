@@ -8,7 +8,7 @@ if ENV['CIRCLECI']
 end
 
 describe 'apt-get' do
-  describe package('nginx') do
+  describe package('git') do
     it { should be_installed }
   end
 end
